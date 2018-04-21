@@ -1,0 +1,18 @@
+#! /bin/sh
+
+curr_brightness=$(/usr/lib/unity-settings-daemon/usd-backlight-helper --get-brightness)
+case $1 in
+    +)
+        new_brightness=$((curr_brightness+20))
+        /usr/lib/unity-settings-daemon/usd-backlight-helper --set-brightness $new_brightness
+        echo "Augmentation $curr_brightness -> $new_brightness"
+        ;;
+    -)
+        new_brightness=$((curr_brightness-20))
+        /usr/lib/unity-settings-daemon/usd-backlight-helper --set-brightness $new_brightness
+        echo "Diminution depuis $curr_brightness -> $new_brightness"
+        ;;
+    *)
+        echo "$curr_brightness"
+        ;;
+esac
